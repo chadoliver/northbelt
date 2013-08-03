@@ -61,16 +61,19 @@ endif
 #
 
 # Define project name here
-PROJECT = ch
+PROJECT = northbelt
 
 # Imported source files and paths
-CHIBIOS = ../..
-include $(CHIBIOS)/boards/ST_STM32F4_DISCOVERY/board.mk
+MY_PROJECT = ..
+CHIBIOS = $(MY_PROJECT)/../..
 include $(CHIBIOS)/os/hal/platforms/STM32F4xx/platform.mk
 include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/ports/GCC/ARMCMx/STM32F4xx/port.mk
 include $(CHIBIOS)/os/kernel/kernel.mk
+include $(CHIBIOS)/os/various/cpp_wrappers/kernel.mk
 include $(CHIBIOS)/test/test.mk
+#include $(CHIBIOS)/boards/ST_STM32F4_DISCOVERY/board.mk
+include $(MY_PROJECT)/main/board.mk
 
 # Define linker script file here
 LDSCRIPT= $(PORTLD)/STM32F407xG.ld
@@ -85,14 +88,17 @@ CSRC = $(PORTSRC) \
        $(PLATFORMSRC) \
        $(BOARDSRC) \
        $(CHIBIOS)/os/various/devices_lib/accel/lis302dl.c \
-       $(CHIBIOS)/os/various/chprintf.c \
-       imu.c \
-       main.c \
-       serialChannel.c
+       $(CHIBIOS)/os/various/chprintf.c 
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
-CPPSRC =
+CPPSRC = $(CHCPPSRC) \
+  		 main.cpp \
+		 outputThread.cpp \
+		 pin.cpp \
+		 pinArray.cpp \
+		 buffer.cpp \
+		
 
 # C sources to be compiled in ARM mode regardless of the global setting.
 # NOTE: Mixing ARM and THUMB mode enables the -mthumb-interwork compiler
@@ -120,7 +126,11 @@ ASMSRC = $(PORTASM)
 INCDIR = $(PORTINC) $(KERNINC) $(TESTINC) \
          $(HALINC) $(PLATFORMINC) $(BOARDINC) \
          $(CHIBIOS)/os/various/devices_lib/accel \
-         $(CHIBIOS)/os/various
+         $(CHIBIOS)/os/various \
+         $(CHCPPINC) \
+         $(MY_PROJECT)/output \
+         $(MY_PROJECT)/main \
+         $(MY_PROJECT)/common 
 
 #
 # Project, sources and paths

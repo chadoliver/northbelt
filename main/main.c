@@ -1,4 +1,22 @@
+#include <ch.hpp>
+#include <hal.h>
 
+#include <outputThread.hpp>
+
+int main(void) {
+
+    halInit();
+	chSysInit();
+    
+    OutputThread outputThread;
+    outputThread.start(NORMALPRIO);
+    
+	while (TRUE) chThdSleepMilliseconds(500);
+
+	return 0;
+};
+
+/*
 #include <ch.hpp>
 #include <hal.hpp>
 #include "serialChannel.hpp"
@@ -10,24 +28,20 @@
 #include <orientationThread.hpp>
 #include <outputThread.hpp>
 
-// #include "bluetoothChannel.c"
+#include "bluetoothChannel.c"
 
 int main(void) {
 
 	halInit();
 	chSysInit();
     
-    /*
     Buffer<imu_state> imuToOrientation;
     Buffer<imu_state> orientationToOut;
     
     IMUThread<1024> imuThread;
     OrientationThread<1024> orientationThread;
-    */  
     OutputThread<8192> outputThread;
     
-    
-    /*
     imuThread.downstreamBuffer = imuToOrientation;
     orientationThread.upstreamBuffer = imuToOrientation;
     orientationThread.downstreamBuffer = orientationToOutput;
@@ -35,11 +49,10 @@ int main(void) {
     
     imuThread.start(NORMALPRIO+1);
     orientationThread.start(NORMALPRIO);
-    */
     outputThread.start(NORMALPRIO);
     
 	while (TRUE) chThdSleepMilliseconds(500);
 
 	return 0;
 };
-
+*/
