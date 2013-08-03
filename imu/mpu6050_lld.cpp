@@ -3,10 +3,7 @@
 #include "mpu6050_lld.h"
 
 
-void MPU6050::MPU6050 (I2CDriver* i2c_instance) {
-    
-    i2c_driver = i2c_instance;
-    
+void MPU6050::configure_device(void) {
     reg_data rdata;
 
     write_register(MPU6050_PWR_MGMT_1, MPU6050_PM1_RESET);
@@ -15,7 +12,7 @@ void MPU6050::MPU6050 (I2CDriver* i2c_instance) {
     write_register(MPU6050_SIGNAL_PATH_RESET, 0b111);
     chThdSleepMilliseconds(200);  // wait for signal path reset
 
-	rdata = MPU6050_PM1_X_GYRO_CLOCKREF & (~(MPU6050_PM1_SLEEP));   // make sure device is 'awake'
+    rdata = MPU6050_PM1_X_GYRO_CLOCKREF & (~(MPU6050_PM1_SLEEP));   // make sure device is 'awake'
     write_register(MPU6050_PWR_MGMT_1, rdata);
 
 	rdata = 16;                                          // 2 ms sample period.
@@ -53,28 +50,14 @@ reg_data MPU6050::read_register(mpu6050_regaddr address) {
     return rxbuf;
 };
 
-vector3 read_accel();
-vector3 read_gyro();
-        
-vector3 MPU6050::read_measurement(mpu6050_regaddr address) {
-    
-    vector3 measurement;
-    
-    i2c_data received[6] = Sensor::read_register((uint8_t) address, 6);
-
-    measurement.x = (received[0] << 8) | received[1];
-    measurement.y = (received[2] << 8) | received[3];
-    measurement.z = (received[4] << 8) | received[5];
-    
-    return measurement;
-};
-
 vector3 MPU6050::read_accel(void) {
-    return read_measurement(MPU6050_ACCEL_XOUT_H);
+    mpu6050_regaddr start_addr = MPU6050_ACCEL_XOUT_H;
+    return read_measurement((uint8_t) start_addr);
 };
 
 vector3 MPU6050::read_rot(void) {
-    return read_measurement(MPU6050_GYRO_XOUT_H);
+    mpu6050_regaddr start_addr = MPU6050_GYRO_XOUT_H;
+    return read_measurement((uint8_t) start_addr);
 };
 
 
