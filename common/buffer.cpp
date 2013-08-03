@@ -4,7 +4,7 @@
 #include "imu.h"
 #include "startThread.c"
 
-void Buffer::Buffer(void) {
+Buffer::Buffer(void) {
     
     // Key idea: there are three items of type BufferedType, At any time, one of these is
     // acting as the 'waiting' object, one is being populated by the producer (upstream 
@@ -48,13 +48,3 @@ BufferedType* Buffer::switch_downstream(void) {
     
     return downstream;
 };
-
-
-
-
-
-
-
-
-
-

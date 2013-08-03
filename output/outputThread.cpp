@@ -1,6 +1,6 @@
 #include <outputThread.hpp>
 
-void OutputThread::OutputThread(void) : BaseStaticThread<thread_memory_size>() {
+OutputThread::OutputThread(void) : BaseStaticThread<8192>() {
     // pass  
 };
 
@@ -9,22 +9,22 @@ virtual msg_t OutputThread::main(void) {
     setName("output-thread");
     
     pinArray.pins = {
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
-        Pin (port, pin),
+        Pin (GPIOA, 9),
+        Pin (GPIOA, 8),
+        Pin (GPIOC, 9),
+        Pin (GPIOC, 8),
+        Pin (GPIOC, 7),
+        Pin (GPIOC, 6),
+        Pin (GPIOB, 15),
+        Pin (GPIOB, 14),
+        Pin (GPIOB, 4),
+        Pin (GPIOA, 10),
+        Pin (GPIOD, 2),
+        Pin (GPIOC, 12),
+        Pin (GPIOC, 11),
+        Pin (GPIOC, 10),
+        Pin (GPIOA, 12),
+        Pin (GPIOA, 11),
     };
     
     pinArray.setGroupLevel(LOW);

@@ -1,9 +1,6 @@
 #ifndef PIN_HPP_
 #define PIN_HPP_
 
-
-
-
 class Pin {
     
     private:
@@ -28,11 +25,11 @@ class Pin {
             HIGH,
         };
 
-        void Pin(port, pin);
+        Pin(int port, int pin);
         void setMode(Mode mode);
         void setLevel(Level level);
         void toggle(void);
-        PinLevel read(void);
+        Level read(void);
 };
 
 #endif

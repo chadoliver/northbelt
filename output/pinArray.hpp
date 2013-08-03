@@ -13,7 +13,7 @@ class PinArray {
         static const uint8_t length = num_pins;
     
     public:
-        void PinArray(void);
+        PinArray(void);
         void setGroupMode(Pin::Mode mode);
         void setGroupLevel(Pin::Level level);
         void choose(uint8_t index);

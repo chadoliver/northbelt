@@ -11,7 +11,7 @@ class Buffer {
         BufferedType* downstream_ptr;     // A pointer to the object which is being used (examined) by the consumer.  
     
     public:
-        void Buffer(void);
+        Buffer(void);
         BufferedType* switch_upstream(void);
         BufferedType* switch_downstream(void);
 };

@@ -2,7 +2,7 @@
 #include <hal.hpp>
 #include <pin.hpp>
 
-void Pin::Pin(port, pin) {
+Pin::Pin(int port, int pin) {
     // constructor
     
     this->port = port;
