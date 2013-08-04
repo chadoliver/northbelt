@@ -1,8 +1,8 @@
-#include "sensor.h"
+#include <types.hpp>
 
 
 /* Register Map */
-typedef enum {
+enum hmc5883l_regaddr {
     HMC5883L_CONFIG_A = 0x00,
     HMC5883L_CONFIG_B = 0x01,
     HMC5883L_MODE     = 0x02,
@@ -13,7 +13,7 @@ typedef enum {
 	HMC5883L_YOUT_H   = 0x07,
 	HMC5883L_YOUT_L   = 0x08,
     HMC5883L_STATUS   = 0x09,
-} hmc5883l_regaddr;
+};
 
 
 /* Config A Register bits */

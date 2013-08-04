@@ -1,10 +1,10 @@
-#include "hal.h"
-#include "ch.h"
-#include "serialChannel.hpp"
+#include <serialChannel.hpp>
+#include <chprintf.h>
 
-void SerialChannel :: SerialChannel(SerialDriver driver) {
-    config = {9600, 0, 0, 0};
-    sdStart(&driver, &config);
+static const SerialConfig config = {9600, 0, 0, 0};
+
+SerialChannel :: SerialChannel(void) {
+    sdStart(&SD2, &config);
 };
 
 int SerialChannel :: readChar(int timeoutInMilliseconds) {

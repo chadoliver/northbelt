@@ -1,7 +1,4 @@
-#include "hal.h"
-#include "ch.h"
-#include "mpu6050_lld.h"
-
+#include <mpu6050_lld.hpp>
 
 void MPU6050::configure_device(void) {
     reg_data rdata;
@@ -33,21 +30,24 @@ void MPU6050::configure_device(void) {
 	rdata = MPU6050_INT_EN_DATA_RD_EN;
     write_register(MPU6050_INT_ENABLE, rdata);
 
-    serial_printString("Successfully configured MPU-9150.");
+    serial.printString("Successfully configured MPU-9150.");
 
     write_register(MPU6050_USER_CTRL, 0b01000000);
 
-    rdata = read_register(MPU6050_USER_CTRL);
-    serial_printInt(rdata);
+    rdata = *(read_register(MPU6050_USER_CTRL, 1));
+    serial.printInt(rdata);
+};
+
+uint8_t MPU6050::getDeviceAddress(void) {
+    return device_address;
 };
 
 void MPU6050::write_register(mpu6050_regaddr address, reg_data rdata) {
-    Sensor::write_register ((uint8_t) address, rdata)
+    Sensor::write_register ((uint8_t) address, rdata);
 };
 
-reg_data MPU6050::read_register(mpu6050_regaddr address) {
-    i2c_data rxbuf Sensor::read_register((uint8_t) address, 1);
-    return rxbuf;
+reg_data* MPU6050::read_register(mpu6050_regaddr address, int rx_bytes) {
+    return Sensor::read_register((uint8_t) address, rx_bytes);
 };
 
 vector3 MPU6050::read_accel(void) {

@@ -1,17 +1,15 @@
 #ifndef SERIALCHANNEL_H_
 #define SERIALCHANNEL_H_
 
-#include <chprintf.h>
+#include <ch.hpp>
+#include <hal.h>
 
 #define SERIAL_DRIVER SD2
 
 class SerialChannel {
     
-    private:
-        static const SerialConfig config;
-    
     public:
-        void SerialChannel(SerialDriver driver);
+        SerialChannel(void);
         int  readChar(int timeoutInMilliseconds);
         void printChar(char character);
         void printString(const char* string);
