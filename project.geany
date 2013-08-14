@@ -1,0 +1,40 @@
+
+[file_prefs]
+final_new_line=true
+ensure_convert_new_lines=true
+strip_trailing_spaces=false
+replace_tabs=false
+
+[indentation]
+indent_width=4
+indent_type=0
+indent_hard_tab_width=8
+detect_indent=false
+detect_indent_width=false
+indent_mode=2
+
+[project]
+name=serial link
+base_path=D:\\ChibiOS\\projects\\serialLink
+description=
+file_patterns=*.c;*.h;
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=100
+
+[files]
+current_page=1
+FILE_NAME_0=0;C;0;16;0;1;1;D%3A%5CChibiOS%5Ctest%5Ctestsem.h;0;4
+FILE_NAME_1=0;C;0;16;0;1;1;D%3A%5CChibiOS%5Ctest%5Ctestsem.c;0;4
+
+[gproject]
+source_patterns=*.c;*.C;*.cpp;*.cxx;*.c++;*.cc;
+header_patterns=*.h;*.H;*.hpp;*.hxx;*.h++;*.hh;*.m;
+ignored_dirs_patterns=.*;CVS;
+generate_tags=false
+
+[build-menu]
+EX_00_LB=_Execute
+EX_00_CM="C:\\Program Files (x86)\\STMicroelectronics\\STM32 ST-LINK Utility\\ST-LINK Utility\\ST-LINK_CLI.exe"  -P "%d\\build\\ch.hex" -V -Rst && exit
+EX_00_WD=

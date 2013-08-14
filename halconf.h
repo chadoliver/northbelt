@@ -1,6 +1,6 @@
 /*
     ChibiOS/RT - Copyright (C) 2006,2007,2008,2009,2010,
-                 2011,2012,2013 Giovanni Di Sirio.
+                 2011,2012 Giovanni Di Sirio.
 
     This file is part of ChibiOS/RT.
 
@@ -16,6 +16,13 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+                                      ---
+
+    A special exception to the GPL can be applied should you wish to distribute
+    a combined work that includes ChibiOS/RT, without being obliged to provide
+    the source code for any proprietary components. See the file exception.txt
+    for full details of how and when the exception can be applied.
 */
 
 /**
@@ -52,7 +59,7 @@
  * @brief   Enables the ADC subsystem.
  */
 #if !defined(HAL_USE_ADC) || defined(__DOXYGEN__)
-#define HAL_USE_ADC                 FALSE
+#define HAL_USE_ADC                 TRUE
 #endif
 
 /**
@@ -66,7 +73,7 @@
  * @brief   Enables the EXT subsystem.
  */
 #if !defined(HAL_USE_EXT) || defined(__DOXYGEN__)
-#define HAL_USE_EXT                 TRUE
+#define HAL_USE_EXT                 FALSE
 #endif
 
 /**
@@ -108,7 +115,7 @@
  * @brief   Enables the PWM subsystem.
  */
 #if !defined(HAL_USE_PWM) || defined(__DOXYGEN__)
-#define HAL_USE_PWM                 FALSE
+#define HAL_USE_PWM                 TRUE
 #endif
 
 /**
@@ -143,7 +150,7 @@
  * @brief   Enables the SPI subsystem.
  */
 #if !defined(HAL_USE_SPI) || defined(__DOXYGEN__)
-#define HAL_USE_SPI                 FALSE
+#define HAL_USE_SPI                 TRUE
 #endif
 
 /**
@@ -209,13 +216,6 @@
 /**
  * @brief   Enables an event sources for incoming packets.
  */
-#if !defined(MAC_USE_ZERO_COPY) || defined(__DOXYGEN__)
-#define MAC_USE_ZERO_COPY           FALSE
-#endif
-
-/**
- * @brief   Enables an event sources for incoming packets.
- */
 #if !defined(MAC_USE_EVENTS) || defined(__DOXYGEN__)
 #define MAC_USE_EVENTS              TRUE
 #endif
@@ -223,6 +223,13 @@
 /*===========================================================================*/
 /* MMC_SPI driver related settings.                                          */
 /*===========================================================================*/
+
+/**
+ * @brief   Block size for MMC transfers.
+ */
+#if !defined(MMC_SECTOR_SIZE) || defined(__DOXYGEN__)
+#define MMC_SECTOR_SIZE             512
+#endif
 
 /**
  * @brief   Delays insertions.
@@ -234,6 +241,32 @@
  */
 #if !defined(MMC_NICE_WAITING) || defined(__DOXYGEN__)
 #define MMC_NICE_WAITING            TRUE
+#endif
+
+/**
+ * @brief   Number of positive insertion queries before generating the
+ *          insertion event.
+ */
+#if !defined(MMC_POLLING_INTERVAL) || defined(__DOXYGEN__)
+#define MMC_POLLING_INTERVAL        10
+#endif
+
+/**
+ * @brief   Interval, in milliseconds, between insertion queries.
+ */
+#if !defined(MMC_POLLING_DELAY) || defined(__DOXYGEN__)
+#define MMC_POLLING_DELAY           10
+#endif
+
+/**
+ * @brief   Uses the SPI polled API for small data transfers.
+ * @details Polled transfers usually improve performance because it
+ *          saves two context switches and interrupt servicing. Note
+ *          that this option has no effect on large transfers which
+ *          are always performed using DMAs/IRQs.
+ */
+#if !defined(MMC_USE_SPI_POLLING) || defined(__DOXYGEN__)
+#define MMC_USE_SPI_POLLING         TRUE
 #endif
 
 /*===========================================================================*/
